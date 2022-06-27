@@ -1,0 +1,27 @@
+#HouseTypeButton{
+	margin: 2% 5% 2% 5%;
+}
+
+#CardSearch{
+	margin: 3rem 3rem 3rem 3rem;
+	display: flex;
+	flex-wrap:wrap;
+}
+
+#PromotedPosts{
+	margin: 5% 5% 10% 5%;
+}
+
+#NewestPosts{
+	margin: 5% 5% 10% 5%;
+}
+
+body{
+	background-color: #6b6863;
+	font-family: Open Sans, Arial, sans-serif;
+	font-weight: 300;
+}
+
+footer{
+
+}

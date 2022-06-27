@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/style.css">
+		<title>Giełda domów</title>
+	</head>
+		<body>
+			<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+			
+			<nav class="navbar navbar-dark bg-dark">
+				<a class="navbar-brand"href="index.html">
+					<img src="images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="logo" style="margin-left: 15px;"> 
+					Giełda Domów
+				</a>
+				<!-- Aktywny przycisk Zaloguj się, gdy nie jest zalogowany
+				Jeśli jest zalogowany to zmienia się na drop down menu i tam jest: konto, ustawienia, wyloguj
+				
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					KONTO
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownUser">
+						<a class="dropdown-item" href="konto.html">Konto</a>
+					</div>
+					
+				</div> -->
+				<button type="button" class="btn btn-outline-info" style="margin-right: 15px;">Konto</button>
+			</nav>
+			
+			
+			<div class="card bg-dark text-white" id="CardSearch">
+				<div class="card-header" style="text-align:center">Znajdź dom twoich marzeń</div>	
+				<div class="card-body">
+					<div class="input-group mb-3" style="float:left;">
+						<select class="custom-select" id="HouseTypeInput" style="float:left;">
+							<option selected>Rodzaj domu...</option>
+							<option value="Wolno">Dom wolnostojący</option>
+							<option value="Blizniak">Dom w zabudowie bliźniaczej</option>
+							<option value="Szereg">Dom szeregowy</option>
+							<option value="Atrialny">Dom atrialny</option>
+						</select>
+						<input type="text" class="form-control" placeholder="Miejscowość" aria-label="HouseLocationInput" style="float:left;">
+						<input type="text" class="form-control" placeholder="+0km" aria-label="HouseLocationRange" style="float:left;">
+					</div>
+						<button type="button" class="btn btn-success btn-lg">Szukaj</button>
+				</div>
+			</div>
+			
+			<div class="card bg-dark text-white" id="PromotedPosts">
+				<div class="card-header" style="text-align:center">Promowane posty</div>
+				<div class="card-body">
+				
+				</div>
+			</div>
+			
+			<div class="card bg-dark text-white" id="NewestPosts">
+				<div class="card-header" style="text-align:center">Najnowsze posty</div>
+				<div class="card-body">
+				
+				</div>
+			</div>
+			<footer>
+				<div class="row">
+					<div class="col-md-6">
+						<p>Copyright © 2022 Dawid Janas</p>
+					</div>
+				</div>
+			</footer>
+		</body>
+</html>

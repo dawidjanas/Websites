@@ -1,6 +1,5 @@
 <?php 
 session_start(); 
-error_reporting(0);
 ?>
 <!DOCTYPE HTML>
 <html>
@@ -23,12 +22,56 @@ error_reporting(0);
 		<script src="js/scripts.js"></script>
 		
 		<nav class="navbar navbar-dark bg-dark">
-			<a class="navbar-brand"href="index.html">
+			<a class="navbar-brand"href="index.php">
 				<img src="images/logo.svg" width="30" height="30" class="d-inline-block align-top" alt="logo" style="margin-left: 15px;"> 
 				Giełda Domów
 			</a>
-			<button type="button" <?php if(isset($_SESSION['loggedInToGieldadomow.pl']) && $_SESSION['loggedInToGieldadomow.pl'] == true) { ?> style="display:none;"<?php } ?>class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#LoginForm" style="margin-right: 15px;">Konto</button>
+			<?php 
+			if(isset($_SESSION['loggedInToGieldadomow.pl']) && $_SESSION['loggedInToGieldadomow.pl'] == true )
+			{ 
+				?>
+				<div class="btn-group dropstart">
+					<a role="button" class="btn btn-outline-primary" style="margin-right:15px;" href="http://localhost:8021/xampp/Gieldadomow.pl/addoffer.php">Dodaj ogłoszenie</a>
+
+					<button type="button" class="btn btn-outline-info" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right:15px;">
+					<?php echo $_SESSION['LoginUsername']; ?>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a class="dropdown-item" href="http://localhost:8021/xampp/Gieldadomow.pl/useroffers.php">Twoje ogłoszenia</a></li>
+						<li><a class="dropdown-item" href="http://localhost:8021/xampp/Gieldadomow.pl/userfavorite.php">Obserwowane ogłoszenia</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li>
+							<form name="SignOut" action="php/signout.php" method="POST">
+								<button class="dropdown-item" type="submit">Wyloguj się</button>
+							</form>
+						</li>
+					</ul>
+				</div>
+				
+				<?php
+			} 
+			else 
+			{
+				?>
+			<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#LoginForm" style="margin-right: 15px">Logowanie/Rejestracja</button>
+			<?php
+			}
+			?>
 		</nav>
+		
+		<?php 
+		if(isset($_SESSION['LoginError']) && $_SESSION['LoginError'] == true)
+		{
+			?>
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+					<strong>Niepoprawny email lub hasło. Spróbuj ponownie</strong>
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			<?php
+		}
+		?>
+
+		
 		
 		<div class="modal fade" id="LoginForm" tabindex="-1" role="dialog" aria-labelledby="LoginFormLabel" aria-hidden="true">
 			<div class="modal-dialog" role="document">
@@ -81,17 +124,17 @@ error_reporting(0);
 								<form name="RegisterForm" action="php/register.php" method="POST" required>
 									<div class="form-outline mb-4">
 										<label class="form-label" for="RegisterUsername">Nazwa użytkownika</label>
-										<input type="text" name="RegisterUsername" id="RegisterUsername" class="form-control" required/>
+										<input type="text" name="RegisterUsername" id="RegisterUsername" class="form-control" maxlength="50" required/>
 									</div>
 									 
 									<div class="form-outline mb-4">
 										<label class="form-label" for="RegisterEmail">E-mail</label>
-										<input type="email" name="RegisterEmail" id="RegisterEmail"class="form-control" required/>
+										<input type="email" name="RegisterEmail" id="RegisterEmail"class="form-control" maxlength="90"required/>
 									</div>
 									
 									<div class="form-outline mb-4">
 										<label class="form-label" for="RegisterPassword">Hasło</label>
-										<input type="password" name="RegisterPassword" id="RegisterPassword" class="form-control"required/>
+										<input type="password" name="RegisterPassword" id="RegisterPassword" class="form-control" minlength="8" maxlength="20" required/>
 										
 									</div>
 									
@@ -126,7 +169,7 @@ error_reporting(0);
 			<div class="card-header" style="text-align:center">Znajdź dom swoich marzeń</div>	
 			<div class="card-body">
 				<div class="input-group mb-3" style="float:left;">
-					<select class="custom-select" id="HouseTypeInput">
+					<select class="form-select" id="HouseTypeInput">
 						<option selected>Rodzaj domu...</option>
 						<option value="Wolno">Dom wolnostojący</option>
 						<option value="Blizniak">Dom w zabudowie bliźniaczej</option>
@@ -138,21 +181,73 @@ error_reporting(0);
 					<!-- Zmienić z input text na dropdown od 5km-500km -->
 					<input type="text" class="form-control" placeholder="+0km" aria-label="HouseLocationRange" style="float:left;">
 				</div>
-					<button type="button" class="btn btn-success btn-lg">Szukaj</button>
+					<div class="text-center">
+					<button type="button" class="btn btn-primary btn-block col-6 mx-auto">Szukaj</button>
+					</div>
 			</div>
 		</div>
 		
 		<div class="card bg-dark text-white" id="PromotedPosts">
 			<div class="card-header" style="text-align:center">Promowane posty</div>
-			<div class="card-body">
+			<div class="card-body text-black">
+			<?php 
+						$query = mysqli_query($conn, "SELECT * FROM offers");
+						while($row = mysqli_fetch_array($query))
+						{
+						
+						if(isset($row['verified']) && isset($row['status']) && isset($row['promoted']) && $row['verified'] == 'yes' && $row['status'] == 'active' && $row['promoted'] == 'yes')
+						{
+							?>
+						<div class="card bg-info" id="OfferPreview" name="OfferPreview">
+						<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer?id=<?php echo $row['id']; ?>">
+							<div class="card-header">
+								<ul class="list-group list-group-horizontal">
+									<li class="list-group-item"><h5 class="mt-0"><?php echo $row['title']; ?></h5></li>
+									<li class="list-group-item"><h5 class="mt-0"><?php echo $row['price']; ?> zł</h5></li>	
+								</ul>
+							</div>
+							<div class="card-body">
+								
+								<?php echo $row['localisation']; ?><br>
+								<?php echo $row['description']; ?>
+							</div>
+						</a>
+						</div>
+						
+						<?php }} ?>
 				
 			</div>
 		</div>
 		
 		<div class="card bg-dark text-white" id="NewestPosts">
 			<div class="card-header" style="text-align:center">Najnowsze posty</div>
-			<div class="card-body">
-			
+			<div class="card-body text-black">
+					<?php 
+						$query = mysqli_query($conn, "SELECT * FROM offers");
+						while($row = mysqli_fetch_array($query))
+						{
+						
+						if(isset($row['verified']) && isset($row['status']) && isset($row['promoted']) && $row['verified'] == 'yes' && $row['status'] == 'active' && $row['promoted'] == 'no')
+						{
+							?>
+						<div class="card" id="OfferPreview" name="OfferPreview">
+						<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer?id=<?php echo $row['id']; ?>">
+							<div class="card-header">
+								<ul class="list-group list-group-horizontal">
+									<li class="list-group-item"><h5 class="mt-0"><?php echo $row['title']; ?></h5></li>
+									<li class="list-group-item"><h5 class="mt-0"><?php echo $row['price']; ?> zł</h5></li>	
+								</ul>
+							</div>
+							<div class="card-body">
+								
+								<?php echo $row['localisation']; ?><br>
+								<?php echo $row['description']; ?>
+							</div>
+						</a>
+						</div>
+						
+						<?php }} ?>
+				
 			</div>
 		</div>
 		

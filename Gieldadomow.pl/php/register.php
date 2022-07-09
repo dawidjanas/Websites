@@ -11,7 +11,7 @@ if(isset($_POST['RegisterButton']))
 	$password = $_POST['RegisterPassword'];
 	$md5_password = md5($password);
 	
-	$query = "INSERT INTO users (user_id, username, email, password) VALUES ('$user_id', '$username', '$email', '$md5_password')";
+	$query = "INSERT INTO users (id, username, email, password) VALUES ('$user_id', '$username', '$email', '$md5_password')";
 	$query_run = mysqli_query($conn, $query);
 	
 	if($query_run)

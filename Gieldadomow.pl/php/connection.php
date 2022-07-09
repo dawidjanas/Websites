@@ -1,3 +1,3 @@
 <?php
-		$conn = mysqli_connect("localhost","root","ServVegasWeb23!$", "maindb_gd");
+		$conn = mysqli_connect("localhost","root","password", "maindb_gd");
 ?>

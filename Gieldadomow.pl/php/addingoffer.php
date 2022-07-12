@@ -8,7 +8,7 @@ if(isset($_POST['AddOfferButton']))
 	
 	$offer_id = uniqid(random_int(1,99999));
 	$title = $_POST['OfferTitle'];
-	$picture = $_POST['OfferPicture'];
+	$b = getimagesize($_FILES['OfferPicture']['tmp_name']);
 	$price = $_POST['OfferPrice'];
 	$seller_type = $_POST['OfferSellerType'];
 	$localisation = $_POST['OfferLocalisation'];
@@ -32,13 +32,21 @@ if(isset($_POST['AddOfferButton']))
 	$promoted = "no";
 	$status = "active";
 	
-	$query = "INSERT INTO offers (id, title, picture, price, seller_type, localisation, house_size, property_size, type, rooms, material, heating_type, heating_install_type, media, floors, roof_type, roof_material, fence, state, description, user_id, added_time, verified, promoted, status) VALUES ('$offer_id', '$title', '$picture', '$price', '$seller_type', '$localisation', '$house_size', '$property_size', '$house_type', '$rooms', '$material', '$heating_type', '$heating_install_type', '$media', '$floors', '$roof_type', '$roof_material', '$fence', '$state', '$description', '$user_id', '$created_on', '$verified', '$promoted', '$status')";
-	$query_run = mysqli_query($conn, $query);
-	
-	if($query_run)
+	if($b !== false)
 	{
-		header("Location: http://localhost:8021/xampp/Gieldadomow.pl/index.php");
-	}
+		$file = $_FILES['OfferPicture']['tmp_name'];
+		$picture = addslashes(file_get_contents($file));
+		$query = "INSERT INTO offers (id, title, picture, price, seller_type, localisation, house_size, property_size, type, rooms, material, heating_type, heating_install_type, media, floors, roof_type, roof_material, fence, state, description, user_id, added_time, verified, promoted, status) VALUES ('$offer_id', '$title', '$picture', '$price', '$seller_type', '$localisation', '$house_size', '$property_size', '$house_type', '$rooms', '$material', '$heating_type', '$heating_install_type', '$media', '$floors', '$roof_type', '$roof_material', '$fence', '$state', '$description', '$user_id', '$created_on', '$verified', '$promoted', '$status')";
+		$query_run = mysqli_query($conn, $query);
 	
+		if($query_run)
+		{
+			header("Location: http://localhost:8021/xampp/Gieldadomow.pl/index.php");
+		}
+	}
+	else
+	{
+		header("Location: http://localhost:8021/xampp/Gieldadomow.pl/imagefail.php");
+	}
 }
 ?>

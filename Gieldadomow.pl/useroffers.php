@@ -58,13 +58,114 @@ session_start();
 		
 		<div class="tab-content" id="UserOffersContent">
 			<div class="tab-pane fade show active" id="ActiveUserOffersTab" role="tabpanel" aria-labelledby="active-tab">
-				<h1>AKTYWNE</h1>
+				<div class="card bg-dark text-white" id="NewestPosts">
+					<div class="card-header" style="text-align:center"></div>
+					<div class="card-body text-black">
+							<?php 
+								$query = mysqli_query($conn, "SELECT * FROM offers WHERE user_id = '".$_SESSION['UserID']."'");
+								while($row = mysqli_fetch_array($query))
+								{
+								
+								if(isset($row['verified']) && isset($row['status']) && $row['verified'] == 'yes' && $row['status'] == 'active')
+								{
+									?>
+								<div class="card" id="OfferPreview" name="OfferPreview">
+								<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer?id=<?php echo $row['id']; ?>">
+									<div class="card-header">
+										<ul class="list-group list-group-horizontal">
+											<li class="list-group-item"><h5 class="mt-0"><?php echo $row['title']; ?></h5></li>
+											<li class="list-group-item"><h5 class="mt-0"><?php echo $row['price']; ?> zł</h5></li>	
+										</ul>
+									</div>
+									<div class="card-body">
+										
+										<img <?php echo 'src="data:image/jpeg;base64,'.base64_encode($row['picture']).'"'; ?> class="img-fluid"/>
+										
+										
+										<?php echo $row['localisation']; ?><br>
+										<?php echo $row['description']; ?>
+									</div>
+								</a>
+								</div>
+								
+								<?php }} ?>
+						
+					</div>
+				</div>
 			</div>
+			
 			<div class="tab-pane fade" id="PendingUserOffersTab" role="tabpanel" aria-labelledby="pending-tab">
-				<h1>OCZEKUJACE</h1>
+				<div class="card bg-dark text-white" id="NewestPosts">
+					<div class="card-header" style="text-align:center"></div>
+					<div class="card-body text-black">
+							<?php 
+								$query = mysqli_query($conn, "SELECT * FROM offers WHERE user_id = '".$_SESSION['UserID']."'");
+								while($row = mysqli_fetch_array($query))
+								{
+								
+								if(isset($row['verified']) && isset($row['status']) && $row['verified'] == 'no' && $row['status'] == 'active')
+								{
+									?>
+								<div class="card" id="OfferPreview" name="OfferPreview">
+								<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer?id=<?php echo $row['id']; ?>">
+									<div class="card-header">
+										<ul class="list-group list-group-horizontal">
+											<li class="list-group-item"><h5 class="mt-0"><?php echo $row['title']; ?></h5></li>
+											<li class="list-group-item"><h5 class="mt-0"><?php echo $row['price']; ?> zł</h5></li>	
+										</ul>
+									</div>
+									<div class="card-body">
+										
+										<img <?php echo 'src="data:image/jpeg;base64,'.base64_encode($row['picture']).'"'; ?> class="img-fluid"/>
+										
+										
+										<?php echo $row['localisation']; ?><br>
+										<?php echo $row['description']; ?>
+									</div>
+								</a>
+								</div>
+								
+								<?php }} ?>
+						
+					</div>
+				</div>
 			</div>
+			
 			<div class="tab-pane fade" id="EndedUserOffersTab" role="tabpanel" aria-labelledby="ended-tab">
-				<h1>Zakończone</h1>
+				<div class="card bg-dark text-white" id="NewestPosts">
+					<div class="card-header" style="text-align:center"></div>
+					<div class="card-body text-black">
+							<?php 
+								$query = mysqli_query($conn, "SELECT * FROM offers WHERE user_id = '".$_SESSION['UserID']."'");
+								while($row = mysqli_fetch_array($query))
+								{
+								
+								if(isset($row['verified']) && isset($row['status']) && $row['verified'] == 'yes' && $row['status'] == 'nonactive')
+								{
+									?>
+								<div class="card" id="OfferPreview" name="OfferPreview">
+								<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer?id=<?php echo $row['id']; ?>">
+									<div class="card-header">
+										<ul class="list-group list-group-horizontal">
+											<li class="list-group-item"><h5 class="mt-0"><?php echo $row['title']; ?></h5></li>
+											<li class="list-group-item"><h5 class="mt-0"><?php echo $row['price']; ?> zł</h5></li>	
+										</ul>
+									</div>
+									<div class="card-body">
+										
+										<img <?php echo 'src="data:image/jpeg;base64,'.base64_encode($row['picture']).'"'; ?> class="img-fluid"/>
+										
+										
+										<?php echo $row['localisation']; ?><br>
+										<?php echo $row['description']; ?>
+									</div>
+								</a>
+								</div>
+								
+								<?php }} ?>
+						
+					</div>
+				</div>
 			</div>
 		</div>						
 		

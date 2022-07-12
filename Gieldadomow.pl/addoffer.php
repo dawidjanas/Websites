@@ -53,7 +53,7 @@ session_start();
 		<div class="card bg-dark text-white" id="PromotedPosts">
 			<div class="card-header" style="text-align:center">Dodaj swoje ogłoszenie</div>
 			<div class="card-body">
-				<form name="AddOffer" action="php/addingoffer.php" method="POST">
+				<form name="AddOffer" action="php/addingoffer.php" method="POST" enctype="multipart/form-data">
 					<div class="form-outline mb-4">
 						<label class="form-label" for="OfferTitle">Tytuł ogłoszenia</label>
 						<input type="text" name="OfferTitle" id="OfferTitle" class="form-control" maxlength="150" required />
@@ -61,7 +61,7 @@ session_start();
 					
 					<div class="form-outline mb-4">
 						<label class="form-label" for="OfferPicture">Zdjęcie</label>
-						<input type="file" name="OfferPicture" id="OfferPicture" class="form-control"required />
+						<input type="file" name="OfferPicture" id="OfferPicture" class="form-control" multiple="multiple" required />
 					</div>
 					
 					<div class="form-outline mb-4">

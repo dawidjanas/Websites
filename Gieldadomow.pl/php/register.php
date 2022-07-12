@@ -1,6 +1,6 @@
 <?php
 session_start();
-include("connection.php");
+require_once("connection.php");
 
 $user_id = uniqid(random_int(1000, 9999));
 

@@ -44,7 +44,43 @@ session_start();
 				</div>
 				
 		</nav>
-		<h1>OFERTA</h1>
+		<?php
+			$offer_id = $_REQUEST['id'];
+			$query = mysqli_query($conn, "SELECT * FROM offers WHERE id = '$offer_id'");
+			$row = mysqli_fetch_array($query);
+			$query2 = mysqli_query($conn, "SELECT users.username FROM users INNER JOIN offers ON users.id = '".$row['user_id']."'");
+			$row2 = mysqli_fetch_array($query2);
+		?>
+		
+		<div class="card">
+			<div class="card-body">
+			<div class="row">
+				<h4 class="card-title"><?php echo $row['title']; ?> </h4>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<img <?php echo 'src="data:image/jpeg;base64,'.base64_encode($row['picture']).'"'; ?> class="img-fluid"/>
+				</div>
+				<div class="col-sm-4">
+					<h5>Informacje szczegółowe</h5>
+					test
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-8">
+					<h5>Opis ogłoszenia</h5>
+					<?php echo $row['description']; ?>
+				</div>
+			</div>
+			<div class="row">
+				<h5>Kontakt</h5>
+				<?php echo $row2['username']; ?>
+			</div>
+			</div>
+		</div>
+			
+		
+		
 		
 		
 		<footer class="footer mt-auto py-1 text-center text-lg-start bg-dark text-white">

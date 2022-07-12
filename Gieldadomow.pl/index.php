@@ -30,7 +30,7 @@ session_start();
 			if(isset($_SESSION['loggedInToGieldadomow.pl']) && $_SESSION['loggedInToGieldadomow.pl'] == true )
 			{ 
 				?>
-				<div class="btn-group dropstart">
+				<div class="btn-group">
 					<a role="button" class="btn btn-outline-primary" style="margin-right:15px;" href="http://localhost:8021/xampp/Gieldadomow.pl/addoffer.php">Dodaj ogłoszenie</a>
 
 					<button type="button" class="btn btn-outline-info" data-bs-toggle="dropdown" aria-expanded="false" style="margin-right:15px;">
@@ -199,7 +199,7 @@ session_start();
 						{
 							?>
 						<div class="card bg-info" id="OfferPreview" name="OfferPreview">
-						<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer?id=<?php echo $row['id']; ?>">
+						<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer.php?id=<?php echo $row['id']; ?>">
 							<div class="card-header">
 								<ul class="list-group list-group-horizontal">
 									<li class="list-group-item"><h5 class="mt-0"><?php echo $row['title']; ?></h5></li>
@@ -230,21 +230,31 @@ session_start();
 						if(isset($row['verified']) && isset($row['status']) && isset($row['promoted']) && $row['verified'] == 'yes' && $row['status'] == 'active' && $row['promoted'] == 'no')
 						{
 							?>
-						<div class="card" id="OfferPreview" name="OfferPreview">
-						<a class="card-block stretched-link text-decoration-none" href="http://localhost:8021/xampp/Gieldadomow.pl/offer?id=<?php echo $row['id']; ?>">
-							<div class="card-header">
-								<ul class="list-group list-group-horizontal">
-									<li class="list-group-item"><h5 class="mt-0"><?php echo $row['title']; ?></h5></li>
-									<li class="list-group-item"><h5 class="mt-0"><?php echo $row['price']; ?> zł</h5></li>	
-								</ul>
+						<div class="card mb-3" id="OfferPreview" name="OfferPreview">
+							
+							<div class="row g-0">
+								<div class="col-md-4">
+									<img <?php echo 'src="data:image/jpeg;base64,'.base64_encode($row['picture']).'"'; ?> class="img-thumbnail"/>
+								</div>
+								<div class="col-md-6">	
+									<div class="card-body">
+										<h4 class="card-title"> <?php echo $row['title']; ?> </h4>
+										<p class="card-text"><?php echo $row['localisation']; ?></p>
+										<p class="card-text"><?php echo $row['description']; ?></p>
+										<small class="text-muted">Dodano <?php echo $row['added_time']; ?></small>
+										<a href="http://localhost:8021/xampp/Gieldadomow.pl/offer.php?id=<?php echo $row['id']; ?>" class="stretched-link"></a>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="card-body">
+										<h5 class="card-title"> <?php echo $row['price']; ?> zł </h5>
+									</div>
+								</div>
+							</a>
 							</div>
-							<div class="card-body">
-								
-								<?php echo $row['localisation']; ?><br>
-								<?php echo $row['description']; ?>
-							</div>
-						</a>
 						</div>
+						
+						
 						
 						<?php }} ?>
 				
@@ -256,5 +266,8 @@ session_start();
 				<a class="text-reset fw-bold" href="https://github.com/dawidjanas/Websites">Dawid Janas</a>
 			</div>
 		</footer>
+		<?php
+		mysqli_close($conn);
+		?>
 	</body>
 </html>

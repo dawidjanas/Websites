@@ -23,3 +23,8 @@ body{
 	height: 100%;
 }
 
+#OfferCard{
+	margin: 3rem 3rem 3rem 3rem;
+	display: flex;
+	flex-wrap:wrap;
+}

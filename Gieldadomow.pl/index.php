@@ -168,22 +168,27 @@ session_start();
 		<div class="card bg-dark text-white" id="CardSearch">
 			<div class="card-header" style="text-align:center">Znajdź dom swoich marzeń</div>	
 			<div class="card-body">
-				<div class="input-group mb-3" style="float:left;">
-					<select class="form-select" id="HouseTypeInput">
-						<option selected>Rodzaj domu...</option>
-						<option value="Wolno">Dom wolnostojący</option>
-						<option value="Blizniak">Dom w zabudowie bliźniaczej</option>
-						<option value="Szereg">Dom szeregowy</option>
-						<option value="Atrialny">Dom atrialny</option>
-					</select>
+				<form name="OfferSearch" id="OfferSearch" method="POST" action="php/offersearch.php">
+					<div class="form-outline mb-4>
+						
+						<select class="form-select" id="HouseTypeInput">
+							<option selected>Rodzaj domu...</option>
+							<option value="Dom wolnostojący">Dom wolnostojący</option>
+							<option value="Dom w zabudowie bliźniaczej">Dom w zabudowie bliźniaczej</option>
+							<option value="Dom szeregowy">Dom szeregowy</option>
+							<option value="Dom atrialny">Dom atrialny</option>
+						</select>
+					</div>
 					<!-- GEO API dodać-->
-					<input type="text" class="form-control" placeholder="Miejscowość" aria-label="HouseLocationInput" style="float:left;">
+					<input type="text" class="form-control" name="HouseLocation" placeholder="Miejscowość" aria-label="HouseLocationInput" style="float:left;">
 					<!-- Zmienić z input text na dropdown od 5km-500km -->
 					<input type="text" class="form-control" placeholder="+0km" aria-label="HouseLocationRange" style="float:left;">
-				</div>
+					
 					<div class="text-center">
-					<button type="button" class="btn btn-primary btn-block col-6 mx-auto">Szukaj</button>
+						<input class="btn btn-primary btn-block col-6  mx-auto" type="submit" name="SearchOfferButton" value="Szukaj"/>
 					</div>
+
+				</form>
 			</div>
 		</div>
 		

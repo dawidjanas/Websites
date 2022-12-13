@@ -1,0 +1,30 @@
+#CardSearch{
+	margin: 3rem 3rem 3rem 3rem;
+	display: flex;
+	flex-wrap:wrap;
+}
+
+#PromotedPosts{
+	margin: 3rem 3rem 3rem 3rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#NewestPosts{
+	margin: 3rem 3rem 3rem 3rem;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+body{
+	background-color: #6b6863;
+	font-family: Open Sans, Arial, sans-serif;
+	font-weight: 300;
+	height: 100%;
+}
+
+#OfferCard{
+	margin: 3rem 3rem 3rem 3rem;
+	display: flex;
+	flex-wrap:wrap;
+}
